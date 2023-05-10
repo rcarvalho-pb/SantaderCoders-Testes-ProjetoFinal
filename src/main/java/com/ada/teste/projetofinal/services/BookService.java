@@ -2,17 +2,19 @@ package com.ada.teste.projetofinal.services;
 
 import com.ada.teste.projetofinal.model.Book;
 import com.ada.teste.projetofinal.repositories.BookRepositoryInMemorie;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import reactor.core.scheduler.Schedulers;
 
 @Service
-@RequiredArgsConstructor
 public class BookService {
 
     private final BookRepositoryInMemorie repository;
+
+    public BookService(BookRepositoryInMemorie repository) {
+        this.repository = repository;
+    }
 
     public Mono<Book> save(Book book){
         return Mono.defer(() -> {

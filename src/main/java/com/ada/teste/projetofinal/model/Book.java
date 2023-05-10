@@ -1,18 +1,16 @@
 package com.ada.teste.projetofinal.model;
 
-import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
+import com.ada.teste.projetofinal.validators.DateValidation;
+import jakarta.validation.constraints.*;
 import lombok.*;
 import org.springframework.data.annotation.Id;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Data
 @Builder
-@AllArgsConstructor
 public class Book {
 
     @Id
@@ -26,10 +24,24 @@ public class Book {
     public String bookSummary;
     public String resume;
     @Min(value = 20, message = "The minimum value of a book is $ 20.00")
-    public BigDecimal price;
+    public Double price;
     @Min(value = 100, message = "The minimum number of pages is 100")
     private Integer pages;
-
+    @DateValidation
+    @NotNull
     private LocalDateTime publicationDate;
 
+    public Book(){
+
+    }
+
+    public Book(Long isbn, String title, String bookSummary, String resume, Double price, Integer pages, LocalDateTime publicationDate){
+        this.isbn = isbn;
+        this.title = title;
+        this.bookSummary = bookSummary;
+        this.resume = resume;
+        this.price = price;
+        this.pages = pages;
+        this.publicationDate = publicationDate;
+    }
 }
