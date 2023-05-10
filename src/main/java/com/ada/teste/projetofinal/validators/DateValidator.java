@@ -15,9 +15,9 @@ public class DateValidator implements ConstraintValidator<DateValidation, String
     public boolean isValid(String value, ConstraintValidatorContext context) {
         try {
             LocalDateTime dateTime = LocalDateTime.parse(value, dtf);
-            if(dateTime.isBefore(LocalDateTime.now()) || dateTime.isEqual(LocalDateTime.now())){
-                throw new DateTimeException("Invalid date.");
-            }
+//            if(dateTime.isBefore(LocalDateTime.now()) || dateTime.isEqual(LocalDateTime.now())){
+//                throw new DateTimeException("Invalid date.");
+//            }
         }
         catch(DateTimeException e){
             return false;

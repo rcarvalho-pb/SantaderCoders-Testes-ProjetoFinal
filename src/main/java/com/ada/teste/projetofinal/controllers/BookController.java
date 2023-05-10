@@ -8,6 +8,7 @@ import reactor.core.publisher.Mono;
 import reactor.core.scheduler.Schedulers;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 @RestController
 //@CrossOrigin("http://localhost:8080")
@@ -36,6 +37,7 @@ public class BookController implements Serializable {
     @PostMapping(value = "save")
     public Mono<Book> saveBook(@RequestBody Book book){
         return Mono.defer(() -> {
+            book.setPublicationDate(LocalDateTime.now());
             return service.save(book);
         }).subscribeOn(Schedulers.parallel());
     }
